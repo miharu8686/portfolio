@@ -5,7 +5,7 @@
 
   /* ---- スクロール連動フェードイン ---- */
   var revealTargets = document.querySelectorAll(
-    "main h2, .card, .hero-stats li, .skill-list li, .workflow-lead, .workflow-diagram, .workflow-note"
+    "main h2, .card, .skill-list li, .workflow-lead, .workflow-diagram, .workflow-note"
   );
   if (!reduceMotion && "IntersectionObserver" in window) {
     var io = new IntersectionObserver(function (entries) {

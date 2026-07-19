@@ -56,7 +56,7 @@
                 <button type="button" class="demo-choice" data-review="complaint">クレーム ★1</button>
               </div>
               <blockquote class="demo-review" id="demo-review-text" hidden></blockquote>
-              <div class="demo-output" id="demo-reply-box" hidden>
+              <div class="demo-output" id="demo-reply-box" aria-live="polite" hidden>
                 <p class="demo-output-label">返信例</p>
                 <p class="demo-reply" id="demo-reply-text"></p>
               </div>
@@ -109,7 +109,7 @@
             <div class="demo-body">
               <p class="demo-note">プロンプトを貼ると、ルールベースの5指標で簡易スコアを即時表示します。ブラウザ内で完結し、API通信は行いません。</p>
               <textarea id="checker-input" rows="5" placeholder="ここにプロンプトを貼り付け" aria-label="チェックするプロンプト"></textarea>
-              <div class="demo-score" id="checker-panel" hidden>
+              <div class="demo-score" id="checker-panel" aria-live="polite" hidden>
                 <p class="score-total"><span id="checker-score">0</span><span class="score-max"> / 100</span></p>
                 <ul class="score-metrics" id="checker-metrics"></ul>
               </div>
