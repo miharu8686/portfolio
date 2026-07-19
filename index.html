@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miharu | 生成AI × 業務自動化エンジニア</title>
 <meta name="description" content="要件定義から運用まで、一人で仕組みごと納品します。生成AIと業務自動化の受託開発ポートフォリオ。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235eead4'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,7 +17,7 @@
     <p class="hero-sub">要件定義から運用まで、一人で仕組みごと納品します。</p>
     <ul class="hero-stats">
       <li>
-        <span class="stat-main">テスト195本</span>
+        <span class="stat-main">テスト<span class="count" data-target="195">195</span>本</span>
         <span class="stat-label">レビュー返信自動化MVP</span>
       </li>
       <li>
@@ -45,6 +46,23 @@
             <div><dt>仕組み</dt><dd>二段階スコアリング（無料フィルタ→SerpAPI）で対象を絞り、AIが返信を生成。月次レポートで運用を可視化。</dd></div>
             <div><dt>結果</dt><dd>テスト195本で品質を担保したMVPとして構築。</dd></div>
           </dl>
+          <details class="demo" id="review-demo">
+            <summary>デモを見る</summary>
+            <div class="demo-body">
+              <p class="demo-note">サンプルレビューを選ぶと返信例が表示されます。返信例は事前に用意した創作サンプルで、API通信は行いません。</p>
+              <div class="demo-choices">
+                <button type="button" class="demo-choice" data-review="positive">高評価 ★5</button>
+                <button type="button" class="demo-choice" data-review="negative">低評価 ★2</button>
+                <button type="button" class="demo-choice" data-review="complaint">クレーム ★1</button>
+              </div>
+              <blockquote class="demo-review" id="demo-review-text" hidden></blockquote>
+              <div class="demo-output" id="demo-reply-box" hidden>
+                <p class="demo-output-label">返信例</p>
+                <p class="demo-reply" id="demo-reply-text"></p>
+              </div>
+              <noscript><p class="demo-note">このデモの実行にはJavaScriptが必要です。</p></noscript>
+            </div>
+          </details>
         </article>
 
         <article class="card">
@@ -86,6 +104,19 @@
             <div><dt>仕組み</dt><dd>ブラウザだけで完結するHTMLツールとして製品化。</dd></div>
             <div><dt>結果</dt><dd>BOOTHで各¥1,980で販売中。</dd></div>
           </dl>
+          <details class="demo" id="checker-demo">
+            <summary>簡易デモを試す</summary>
+            <div class="demo-body">
+              <p class="demo-note">プロンプトを貼ると、ルールベースの5指標で簡易スコアを即時表示します。ブラウザ内で完結し、API通信は行いません。</p>
+              <textarea id="checker-input" rows="5" placeholder="ここにプロンプトを貼り付け" aria-label="チェックするプロンプト"></textarea>
+              <div class="demo-score" id="checker-panel" hidden>
+                <p class="score-total"><span id="checker-score">0</span><span class="score-max"> / 100</span></p>
+                <ul class="score-metrics" id="checker-metrics"></ul>
+              </div>
+              <p class="demo-note">製品版はより詳細な評価が可能です。<a href="https://miharuitshop.booth.pm/">BOOTHで見る</a></p>
+              <noscript><p class="demo-note">このデモの実行にはJavaScriptが必要です。</p></noscript>
+            </div>
+          </details>
           <p class="card-link"><a href="https://miharuitshop.booth.pm/">BOOTHショップを見る</a></p>
         </article>
 
@@ -130,9 +161,9 @@
         <text x="510" y="224" class="node-title">実装</text>
         <text x="510" y="244" class="node-sub">コード・テスト</text>
         <!-- arrows: PO -> 設計 -> 実装 -> PO -->
-        <line x1="252" y1="76" x2="164" y2="194" class="edge" marker-end="url(#arrow)"></line>
-        <line x1="206" y1="230" x2="434" y2="230" class="edge" marker-end="url(#arrow)"></line>
-        <line x1="476" y1="194" x2="388" y2="76" class="edge" marker-end="url(#arrow)"></line>
+        <line x1="252" y1="76" x2="164" y2="194" class="edge edge-1" marker-end="url(#arrow)"></line>
+        <line x1="206" y1="230" x2="434" y2="230" class="edge edge-2" marker-end="url(#arrow)"></line>
+        <line x1="476" y1="194" x2="388" y2="76" class="edge edge-3" marker-end="url(#arrow)"></line>
         <text x="150" y="130" class="edge-label">要件</text>
         <text x="320" y="220" class="edge-label">仕様</text>
         <text x="490" y="130" class="edge-label">納品</text>
@@ -150,5 +181,6 @@
   </div>
 </footer>
 
+<script src="script.js" defer></script>
 </body>
 </html>

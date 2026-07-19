@@ -119,6 +119,13 @@ section {
   padding: 24px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-dim);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.4);
 }
 
 .card h3 {
@@ -217,6 +224,20 @@ section {
 .workflow-diagram .edge {
   stroke: var(--accent);
   stroke-width: 1.5;
+  opacity: 0.3;
+  animation: edge-pulse 4.8s ease-in-out infinite;
+}
+
+.workflow-diagram .edge-1 { animation-delay: 0s; }
+.workflow-diagram .edge-2 { animation-delay: 1.6s; }
+.workflow-diagram .edge-3 { animation-delay: 3.2s; }
+
+@keyframes edge-pulse {
+  0% { opacity: 0.3; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  45% { opacity: 0.3; }
+  100% { opacity: 0.3; }
 }
 
 .workflow-diagram .edge-label {
@@ -251,6 +272,202 @@ section {
 .contact-mail {
   margin-top: 12px;
   font-size: 1.2rem;
+}
+
+/* Scroll reveal (JSが .reveal を付与。JS無効時は常時表示) */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Demos */
+.demo {
+  margin-top: 16px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.demo summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 600;
+  user-select: none;
+}
+
+.demo summary:hover {
+  color: var(--accent-dim);
+}
+
+.demo-body {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-note {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+}
+
+.demo-choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demo-choice {
+  background: var(--bg-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.demo-choice:hover {
+  border-color: var(--accent-dim);
+}
+
+.demo-choice.active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.demo-review {
+  border-left: 3px solid var(--border);
+  padding-left: 12px;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+.demo-output {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.demo-output-label {
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.demo-reply {
+  font-size: 0.9rem;
+  min-height: 3.6em;
+}
+
+.demo-reply.typing::after {
+  content: "|";
+  color: var(--accent);
+  animation: caret-blink 1s steps(1) infinite;
+}
+
+@keyframes caret-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.demo textarea {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.demo textarea:focus {
+  outline: none;
+  border-color: var(--accent-dim);
+}
+
+.demo-score {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.score-total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.score-max {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.score-metrics {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.score-metrics li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  font-size: 0.8rem;
+}
+
+.metric-status {
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.metric-status.ok { color: var(--accent); }
+.metric-status.warn { color: #e0b355; }
+.metric-status.ng { color: var(--text-dim); }
+
+.metric-advice {
+  color: var(--text-dim);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover {
+    transition: none;
+    transform: none;
+  }
+
+  .workflow-diagram .edge {
+    animation: none;
+    opacity: 1;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .demo-reply.typing::after {
+    animation: none;
+  }
 }
 
 /* Responsive */
