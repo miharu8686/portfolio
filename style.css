@@ -95,7 +95,9 @@ footer.contact {
 }
 
 /* Works: tree 風の階層表現。罫線は文字ではなくCSSの線で描くため
-   和文フォントにフォールバックしても桁ズレしない */
+   和文フォントにフォールバックしても桁ズレしない。
+   .work-list は .work の親コンテナで、末尾判定(:last-child →└)の基準。
+   スタイルは各 .work 側に持たせるためルールは持たない */
 .tree-root {
   font-weight: 500;
 }
