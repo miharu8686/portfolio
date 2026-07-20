@@ -3,55 +3,22 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  /* ---- スクロール連動フェードイン ---- */
-  var revealTargets = document.querySelectorAll(
-    "main h2, .card, .skill-list li, .workflow-lead, .workflow-diagram, .workflow-note"
-  );
-  if (!reduceMotion && "IntersectionObserver" in window) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-    revealTargets.forEach(function (el, i) {
-      el.classList.add("reveal");
-      el.style.transitionDelay = (i % 3) * 80 + "ms";
-      io.observe(el);
-    });
-  }
-
-  /* ---- 実績数字のカウントアップ(初回表示時のみ) ---- */
-  var counters = document.querySelectorAll(".count");
-  if (!reduceMotion && "IntersectionObserver" in window && counters.length) {
-    var countIo = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        countIo.unobserve(entry.target);
-        animateCount(entry.target);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function (el) {
-      countIo.observe(el);
-    });
-  }
-
-  function animateCount(el) {
-    var target = parseInt(el.getAttribute("data-target"), 10);
-    if (isNaN(target)) return;
-    var duration = 1200;
-    var start = null;
-    function step(ts) {
-      if (start === null) start = ts;
-      var progress = Math.min((ts - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(target * eased);
-      if (progress < 1) requestAnimationFrame(step);
-    }
-    el.textContent = "0";
-    requestAnimationFrame(step);
+  /* ---- ヒーロー1行のタイプ表示(ページロード時に1度だけ) ---- */
+  var heroLine = document.getElementById("hero-type");
+  if (heroLine && !reduceMotion) {
+    var heroText = heroLine.getAttribute("data-text");
+    heroLine.style.minHeight = heroLine.offsetHeight + "px";
+    heroLine.textContent = "";
+    heroLine.classList.add("typing");
+    var hi = 0;
+    var heroTimer = setInterval(function () {
+      hi += 1;
+      heroLine.textContent = heroText.slice(0, hi);
+      if (hi >= heroText.length) {
+        clearInterval(heroTimer);
+        heroLine.classList.remove("typing");
+      }
+    }, 45);
   }
 
   /* ---- review-pipeline デモ: サンプルレビューと返信例(創作サンプル・API不使用) ---- */
