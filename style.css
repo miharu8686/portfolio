@@ -1,9 +1,9 @@
 :root {
-  --bg: #FCFCFA;
+  --bg: #F2EDE3;
   --ink: #1A1A1A;
   --ink-dim: #6B6660;
-  --rule: #DDD8CE;
-  --accent: #8A6400;
+  --rule: #D5CDBC;
+  --accent: #7E5B00;
 }
 
 * {
@@ -42,17 +42,21 @@ footer.contact {
   border-top: 1px solid var(--rule);
 }
 
-/* 見出し = コマンド行 */
+/* 見出し = コマンド行、その下がコマンドの出力 */
 .cmd {
   font-size: 1rem;
   font-weight: 700;
   color: var(--ink);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
 }
 
-.prompt-line {
+/* 出力ブロック: 左インデントでコマンド行と区別する */
+.output {
+  padding-left: 1.8em;
+}
+
+.comment {
   color: var(--ink-dim);
-  margin-bottom: 8px;
 }
 
 /* Hero */
@@ -90,16 +94,50 @@ footer.contact {
   font-weight: 500;
 }
 
-/* Works */
-.work-list {
-  display: flex;
-  flex-direction: column;
-  gap: 48px;
+/* Works: tree 風の階層表現。罫線は文字ではなくCSSの線で描くため
+   和文フォントにフォールバックしても桁ズレしない。
+   .work-list は .work の親コンテナで、末尾判定(:last-child →└)の基準。
+   スタイルは各 .work 側に持たせるためルールは持たない */
+.tree-root {
+  font-weight: 500;
 }
 
 .work {
-  border-left: 1px solid var(--rule);
-  padding-left: 24px;
+  position: relative;
+  padding-left: 2.4em;
+  padding-bottom: 44px;
+}
+
+.work:last-child {
+  padding-bottom: 0;
+}
+
+/* 縦の幹。次の項目と連続して見えるよう padding-bottom の端まで伸ばす */
+.work::before {
+  content: "";
+  position: absolute;
+  left: 0.7em;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--rule);
+}
+
+/* 最後の項目は分岐点で幹を止めて └ の形にする */
+.work:last-child::before {
+  bottom: auto;
+  height: 0.9rem;
+}
+
+/* 分岐の横棒 */
+.work::after {
+  content: "";
+  position: absolute;
+  left: 0.7em;
+  top: 0.9rem;
+  width: 1.1em;
+  height: 1px;
+  background: var(--rule);
 }
 
 .work h3 {
@@ -107,15 +145,14 @@ footer.contact {
   font-weight: 700;
 }
 
-.work h3::before {
-  content: "── " / "";
-  color: var(--rule);
-  font-weight: 400;
-}
-
 .work-tag {
   color: var(--accent);
   font-size: 0.85rem;
+}
+
+.work-meta {
+  color: var(--ink-dim);
+  font-size: 0.82rem;
   margin-bottom: 16px;
 }
 
@@ -149,30 +186,42 @@ footer.contact {
   font-size: 0.9rem;
 }
 
-/* Skills: 等幅整列表 */
+/* Skills: 設定ファイル風。等幅の桁揃えを活かすため列幅は表に任せる */
 .table-scroll {
   overflow-x: auto;
 }
 
-.skill-table {
-  border-collapse: collapse;
+.skill-config {
   font-size: 0.92rem;
 }
 
-.skill-table th {
-  text-align: left;
-  font-weight: 500;
-  color: var(--ink-dim);
-  padding: 10px 4ch 10px 2ch;
-  border-bottom: 1px solid var(--rule);
+.skill-section {
+  color: var(--accent);
+  font-weight: 700;
   white-space: nowrap;
-  width: 18ch;
+  margin-top: 22px;
 }
 
-.skill-table td {
-  padding: 10px 4ch 10px 0;
-  border-bottom: 1px solid var(--rule);
+.skill-config dt:first-child {
+  margin-top: 0;
+}
+
+.skill-items {
+  list-style: none;
+  display: flex;
+  padding-left: 1.8em;
+}
+
+/* 区分をまたいで列頭が揃うよう、最終列以外に共通の最小幅を与える */
+.skill-items li {
+  min-width: 12em;
+  padding-right: 2ch;
   white-space: nowrap;
+}
+
+.skill-items li:last-child {
+  min-width: 0;
+  padding-right: 0;
 }
 
 /* Workflow */
@@ -230,13 +279,12 @@ footer.contact {
 }
 
 /* Contact */
-.contact p {
-  color: var(--ink-dim);
+.contact .comment {
   font-size: 0.92rem;
 }
 
 .contact-mail {
-  margin-top: 8px;
+  margin-top: 4px;
   font-size: 1rem;
 }
 
@@ -432,8 +480,22 @@ footer.contact {
     padding: 56px 0 40px;
   }
 
+  .output {
+    padding-left: 1.2em;
+  }
+
   .work {
-    padding-left: 14px;
+    padding-left: 1.8em;
+    padding-bottom: 36px;
+  }
+
+  .work::before,
+  .work::after {
+    left: 0.5em;
+  }
+
+  .work::after {
+    width: 0.8em;
   }
 
   .work dl div {
@@ -446,8 +508,11 @@ footer.contact {
     width: auto;
   }
 
-  .skill-table th,
-  .skill-table td {
-    padding-right: 2ch;
+  .skill-items {
+    padding-left: 1.2em;
+  }
+
+  .skill-items li {
+    min-width: 10em;
   }
 }

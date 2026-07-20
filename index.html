@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miharu | 生成AI × 業務自動化エンジニア</title>
 <meta name="description" content="要件定義から運用まで、一人で仕組みごと納品します。生成AIと業務自動化の受託開発ポートフォリオ。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FCFCFA'/%3E%3Crect x='6' y='6' width='52' height='52' fill='none' stroke='%238A6400' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F2EDE3'/%3E%3Crect x='6' y='6' width='52' height='52' fill='none' stroke='%237E5B00' stroke-width='6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -15,26 +15,31 @@
 
 <header class="hero">
   <div class="container">
-    <p class="prompt-line">$ whoami</p>
-    <h1>Miharu — 生成AI × 業務自動化エンジニア</h1>
-    <p class="hero-sub" id="hero-type" data-text="要件定義から運用まで、一人で仕組みごと納品します。">要件定義から運用まで、一人で仕組みごと納品します。</p>
-    <ul class="hero-stats">
-      <li><span class="stat-main">テスト195本</span> — レビュー返信自動化MVP</li>
-      <li><span class="stat-main">Zenn出版</span> — 開発手法を書籍化・販売中</li>
-      <li><span class="stat-main">規律の基盤化</span> — AI開発規律をバージョン管理で運用</li>
-    </ul>
+    <p class="cmd">$ whoami</p>
+    <div class="output">
+      <h1>Miharu — 生成AI × 業務自動化エンジニア</h1>
+      <p class="hero-sub" id="hero-type" data-text="要件定義から運用まで、一人で仕組みごと納品します。">要件定義から運用まで、一人で仕組みごと納品します。</p>
+      <ul class="hero-stats">
+        <li><span class="stat-main">テスト195本</span> — レビュー返信自動化MVP</li>
+        <li><span class="stat-main">Zenn出版</span> — 開発手法を書籍化・販売中</li>
+        <li><span class="stat-main">規律の基盤化</span> — AI開発規律をバージョン管理で運用</li>
+      </ul>
+    </div>
   </div>
 </header>
 
 <main>
   <section class="works">
     <div class="container">
-      <h2 class="cmd">$ ls works/</h2>
+      <h2 class="cmd">$ tree works/</h2>
+      <div class="output">
+      <p class="tree-root">works/</p>
       <div class="work-list">
 
         <article class="work">
           <h3>review-pipeline</h3>
           <p class="work-tag">Googleレビュー返信の自動化MVP</p>
+          <p class="work-meta"># python, serpapi, claude-api, gmail</p>
           <dl>
             <div><dt>課題</dt><dd>店舗のGoogleレビュー返信が手作業のまま滞り、放置される。</dd></div>
             <div><dt>仕組み</dt><dd>二段階スコアリング（無料フィルタ→SerpAPI）で対象を絞り、AIが返信を生成。月次レポートで運用を可視化。</dd></div>
@@ -63,6 +68,7 @@
         <article class="work">
           <h3>claude-harness</h3>
           <p class="work-tag">AI協働開発の規律基盤</p>
+          <p class="work-meta"># git, powershell, markdown</p>
           <dl>
             <div><dt>課題</dt><dd>AIとの協働開発は場当たり的になりやすく、品質が安定しない。</dd></div>
             <div><dt>仕組み</dt><dd>設計役割定義・判断ヒューリスティクス59件・deploy自動化を、バージョン管理された基盤として整備。</dd></div>
@@ -74,6 +80,7 @@
         <article class="work">
           <h3>Zenn本「一人開発を三役で回す」</h3>
           <p class="work-tag">開発手法の書籍化</p>
+          <p class="work-meta"># zenn, markdown</p>
           <dl>
             <div><dt>課題</dt><dd>一人開発は視点が偏り、設計と検証が甘くなる。</dd></div>
             <div><dt>仕組み</dt><dd>PO／設計／実装の三役をAIと分担する開発手法として体系化。</dd></div>
@@ -86,6 +93,7 @@
         <article class="work">
           <h3>persona-sim</h3>
           <p class="work-tag">ローカルLLMによるペルソナ行動実験</p>
+          <p class="work-meta"># python, ollama, qwen3</p>
           <dl>
             <div><dt>課題</dt><dd>ペルソナ設計の妥当性を定量的に確かめる手段がない。</dd></div>
             <div><dt>仕組み</dt><dd>ローカルLLM（Ollama / qwen3:14b）でMBTI型ペルソナの行動差を測定する実験システム。</dd></div>
@@ -97,6 +105,7 @@
         <article class="work">
           <h3>BOOTH製品</h3>
           <p class="work-tag">プロンプト品質チェッカー / AI議論エンジン</p>
+          <p class="work-meta"># html, javascript</p>
           <dl>
             <div><dt>課題</dt><dd>プロンプトの品質や議論の質を、個人が客観的に評価しにくい。</dd></div>
             <div><dt>仕組み</dt><dd>ブラウザだけで完結するHTMLツールとして製品化。</dd></div>
@@ -120,29 +129,34 @@
         </article>
 
       </div>
+      </div>
     </div>
   </section>
 
   <section class="skills">
     <div class="container">
       <h2 class="cmd">$ cat skills.txt</h2>
+      <div class="output">
       <div class="table-scroll">
-      <table class="skill-table">
-        <tbody>
-          <tr>
-            <th scope="row">案件で使用</th>
-            <td>Python</td>
-            <td>GAS</td>
-            <td>Claude API</td>
-          </tr>
-          <tr>
-            <th scope="row">個人開発で使用</th>
-            <td>N8N</td>
-            <td>Ollama</td>
-            <td>GitHub Actions</td>
-          </tr>
-        </tbody>
-      </table>
+        <dl class="skill-config">
+          <dt class="skill-section">[案件で使用]</dt>
+          <dd>
+            <ul class="skill-items">
+              <li>Python</li>
+              <li>GAS</li>
+              <li>Claude API</li>
+            </ul>
+          </dd>
+          <dt class="skill-section">[個人開発で使用]</dt>
+          <dd>
+            <ul class="skill-items">
+              <li>N8N</li>
+              <li>Ollama</li>
+              <li>GitHub Actions</li>
+            </ul>
+          </dd>
+        </dl>
+      </div>
       </div>
     </div>
   </section>
@@ -150,6 +164,7 @@
   <section class="workflow">
     <div class="container">
       <h2 class="cmd">$ cat workflow.md</h2>
+      <div class="output">
       <p class="workflow-lead">PO・設計・実装の三役を一人で回し、各役割でAIを使い分けます。役割を分けることで、一人でも「発注者の視点」と「作り手の視点」の両方から品質を検証します。</p>
       <svg class="workflow-diagram" viewBox="0 0 640 300" role="img" aria-label="PO・設計・実装の三役が循環する開発体制の図">
         <defs>
@@ -178,6 +193,7 @@
         <text x="490" y="130" class="edge-label">納品</text>
       </svg>
       <p class="workflow-note">この体制の詳細は <a href="https://zenn.dev/miharu_tools/books/solo-dev-three-roles">Zenn本「一人開発を三役で回す」</a> にまとめています。</p>
+      </div>
     </div>
   </section>
 </main>
@@ -185,8 +201,10 @@
 <footer class="contact">
   <div class="container">
     <h2 class="cmd">$ cat contact.txt</h2>
-    <p>お仕事のご相談は下記メールアドレスまで。</p>
-    <p class="contact-mail"><a href="mailto:harumi@guest-reply.jp">harumi@guest-reply.jp</a></p>
+    <div class="output">
+      <p class="comment"># お仕事のご相談は下記メールアドレスまで</p>
+      <p class="contact-mail"><a href="mailto:harumi@guest-reply.jp">harumi@guest-reply.jp</a></p>
+    </div>
   </div>
 </footer>
 
