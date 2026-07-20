@@ -7,6 +7,7 @@
   var heroLine = document.getElementById("hero-type");
   if (heroLine && !reduceMotion) {
     var heroText = heroLine.getAttribute("data-text");
+    heroLine.setAttribute("aria-label", heroText);
     heroLine.style.minHeight = heroLine.offsetHeight + "px";
     heroLine.textContent = "";
     heroLine.classList.add("typing");

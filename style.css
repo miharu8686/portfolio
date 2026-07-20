@@ -15,7 +15,7 @@
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, "Courier New", monospace;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, "Courier New", "BIZ UDGothic", "MS Gothic", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", Meiryo, monospace;
   line-height: 1.8;
   font-size: 15px;
 }
@@ -48,10 +48,6 @@ footer.contact {
   font-weight: 700;
   color: var(--ink);
   margin-bottom: 32px;
-}
-
-.cmd::before {
-  content: "";
 }
 
 .prompt-line {
@@ -112,7 +108,7 @@ footer.contact {
 }
 
 .work h3::before {
-  content: "── ";
+  content: "── " / "";
   color: var(--rule);
   font-weight: 400;
 }
@@ -265,11 +261,11 @@ footer.contact {
 }
 
 .demo summary::before {
-  content: "▸ ";
+  content: "▸ " / "";
 }
 
 .demo[open] summary::before {
-  content: "▾ ";
+  content: "▾ " / "";
 }
 
 .demo summary:hover {
