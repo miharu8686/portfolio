@@ -5,29 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miharu | 生成AI × 業務自動化エンジニア</title>
 <meta name="description" content="要件定義から運用まで、一人で仕組みごと納品します。生成AIと業務自動化の受託開発ポートフォリオ。">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%235eead4'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23FCFCFA'/%3E%3Crect x='6' y='6' width='52' height='52' fill='none' stroke='%238A6400' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="hero">
   <div class="container">
-    <p class="hero-name">Miharu</p>
-    <h1>生成AI × 業務自動化エンジニア</h1>
-    <p class="hero-sub">要件定義から運用まで、一人で仕組みごと納品します。</p>
+    <p class="prompt-line">$ whoami</p>
+    <h1>Miharu — 生成AI × 業務自動化エンジニア</h1>
+    <p class="hero-sub" id="hero-type" data-text="要件定義から運用まで、一人で仕組みごと納品します。">要件定義から運用まで、一人で仕組みごと納品します。</p>
     <ul class="hero-stats">
-      <li>
-        <span class="stat-main">テスト<span class="count" data-target="195">195</span>本</span>
-        <span class="stat-label">レビュー返信自動化MVP</span>
-      </li>
-      <li>
-        <span class="stat-main">Zenn出版</span>
-        <span class="stat-label">開発手法を書籍化・販売中</span>
-      </li>
-      <li>
-        <span class="stat-main">規律の基盤化</span>
-        <span class="stat-label">AI開発規律をバージョン管理で運用</span>
-      </li>
+      <li><span class="stat-main">テスト195本</span> — レビュー返信自動化MVP</li>
+      <li><span class="stat-main">Zenn出版</span> — 開発手法を書籍化・販売中</li>
+      <li><span class="stat-main">規律の基盤化</span> — AI開発規律をバージョン管理で運用</li>
     </ul>
   </div>
 </header>
@@ -35,16 +29,17 @@
 <main>
   <section class="works">
     <div class="container">
-      <h2>成果物</h2>
-      <div class="card-grid">
+      <h2 class="cmd">$ ls works/</h2>
+      <div class="work-list">
 
-        <article class="card">
+        <article class="work">
           <h3>review-pipeline</h3>
-          <p class="card-tag">Googleレビュー返信の自動化MVP</p>
+          <p class="work-tag">Googleレビュー返信の自動化MVP</p>
           <dl>
             <div><dt>課題</dt><dd>店舗のGoogleレビュー返信が手作業のまま滞り、放置される。</dd></div>
             <div><dt>仕組み</dt><dd>二段階スコアリング（無料フィルタ→SerpAPI）で対象を絞り、AIが返信を生成。月次レポートで運用を可視化。</dd></div>
             <div><dt>結果</dt><dd>テスト195本で品質を担保したMVPとして構築。</dd></div>
+            <div><dt>判断</dt><dd>SerpAPIは有料のため、無料フィルタで対象を絞ってから課金APIを叩く二段階構成にし、運用コストを対象店舗数に比例させた。</dd></div>
           </dl>
           <details class="demo" id="review-demo">
             <summary>デモを見る</summary>
@@ -65,44 +60,48 @@
           </details>
         </article>
 
-        <article class="card">
+        <article class="work">
           <h3>claude-harness</h3>
-          <p class="card-tag">AI協働開発の規律基盤</p>
+          <p class="work-tag">AI協働開発の規律基盤</p>
           <dl>
             <div><dt>課題</dt><dd>AIとの協働開発は場当たり的になりやすく、品質が安定しない。</dd></div>
             <div><dt>仕組み</dt><dd>設計役割定義・判断ヒューリスティクス59件・deploy自動化を、バージョン管理された基盤として整備。</dd></div>
             <div><dt>結果</dt><dd>全プロジェクト共通の開発規律として継続運用中。</dd></div>
+            <div><dt>判断</dt><dd>規律を人の記憶ではなくバージョン管理された文書に置き、逸脱を検知できる形にした。</dd></div>
           </dl>
         </article>
 
-        <article class="card">
+        <article class="work">
           <h3>Zenn本「一人開発を三役で回す」</h3>
-          <p class="card-tag">開発手法の書籍化</p>
+          <p class="work-tag">開発手法の書籍化</p>
           <dl>
             <div><dt>課題</dt><dd>一人開発は視点が偏り、設計と検証が甘くなる。</dd></div>
             <div><dt>仕組み</dt><dd>PO／設計／実装の三役をAIと分担する開発手法として体系化。</dd></div>
             <div><dt>結果</dt><dd>Zennで¥1,500で販売中。</dd></div>
+            <div><dt>判断</dt><dd>手法を売る前に自分の開発で運用し、その実運用の記録を素材にした。</dd></div>
           </dl>
-          <p class="card-link"><a href="https://zenn.dev/miharu_tools/books/solo-dev-three-roles">Zennで読む</a></p>
+          <p class="work-link"><a href="https://zenn.dev/miharu_tools/books/solo-dev-three-roles">Zennで読む →</a></p>
         </article>
 
-        <article class="card">
+        <article class="work">
           <h3>persona-sim</h3>
-          <p class="card-tag">ローカルLLMによるペルソナ行動実験</p>
+          <p class="work-tag">ローカルLLMによるペルソナ行動実験</p>
           <dl>
             <div><dt>課題</dt><dd>ペルソナ設計の妥当性を定量的に確かめる手段がない。</dd></div>
             <div><dt>仕組み</dt><dd>ローカルLLM（Ollama / qwen3:14b）でMBTI型ペルソナの行動差を測定する実験システム。</dd></div>
             <div><dt>結果</dt><dd>API費ゼロの実験設計で、ペルソナ間の行動差を測定可能に。</dd></div>
+            <div><dt>判断</dt><dd>試行回数が必要な実験のため、API課金ではなくローカルLLMを選び、コストを気にせず反復できる構成にした。</dd></div>
           </dl>
         </article>
 
-        <article class="card">
+        <article class="work">
           <h3>BOOTH製品</h3>
-          <p class="card-tag">プロンプト品質チェッカー / AI議論エンジン</p>
+          <p class="work-tag">プロンプト品質チェッカー / AI議論エンジン</p>
           <dl>
             <div><dt>課題</dt><dd>プロンプトの品質や議論の質を、個人が客観的に評価しにくい。</dd></div>
             <div><dt>仕組み</dt><dd>ブラウザだけで完結するHTMLツールとして製品化。</dd></div>
             <div><dt>結果</dt><dd>BOOTHで各¥1,980で販売中。</dd></div>
+            <div><dt>判断</dt><dd>配布とサポートの負荷を下げるため、サーバ不要の単一HTMLで完結する形にした。</dd></div>
           </dl>
           <details class="demo" id="checker-demo">
             <summary>簡易デモを試す</summary>
@@ -117,7 +116,7 @@
               <noscript><p class="demo-note">このデモの実行にはJavaScriptが必要です。</p></noscript>
             </div>
           </details>
-          <p class="card-link"><a href="https://miharuitshop.booth.pm/">BOOTHショップを見る</a></p>
+          <p class="work-link"><a href="https://miharuitshop.booth.pm/">BOOTHショップを見る →</a></p>
         </article>
 
       </div>
@@ -126,44 +125,54 @@
 
   <section class="skills">
     <div class="container">
-      <h2>スキルスタック</h2>
-      <ul class="skill-list">
-        <li>Python</li>
-        <li>GAS</li>
-        <li>N8N</li>
-        <li>Claude API</li>
-        <li>Ollama</li>
-        <li>GitHub Actions</li>
-      </ul>
+      <h2 class="cmd">$ cat skills.txt</h2>
+      <div class="table-scroll">
+      <table class="skill-table">
+        <tbody>
+          <tr>
+            <th scope="row">案件で使用</th>
+            <td>Python</td>
+            <td>GAS</td>
+            <td>Claude API</td>
+          </tr>
+          <tr>
+            <th scope="row">個人開発で使用</th>
+            <td>N8N</td>
+            <td>Ollama</td>
+            <td>GitHub Actions</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
     </div>
   </section>
 
   <section class="workflow">
     <div class="container">
-      <h2>働き方 — 三役開発体制</h2>
+      <h2 class="cmd">$ cat workflow.md</h2>
       <p class="workflow-lead">PO・設計・実装の三役を一人で回し、各役割でAIを使い分けます。役割を分けることで、一人でも「発注者の視点」と「作り手の視点」の両方から品質を検証します。</p>
       <svg class="workflow-diagram" viewBox="0 0 640 300" role="img" aria-label="PO・設計・実装の三役が循環する開発体制の図">
         <defs>
           <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5eead4"></path>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#1A1A1A"></path>
           </marker>
         </defs>
         <!-- PO -->
-        <rect x="250" y="16" width="140" height="56" rx="8" class="node"></rect>
+        <rect x="250" y="16" width="140" height="56" class="node"></rect>
         <text x="320" y="40" class="node-title">PO</text>
         <text x="320" y="60" class="node-sub">要件・検収</text>
         <!-- 設計 -->
-        <rect x="60" y="200" width="140" height="56" rx="8" class="node"></rect>
+        <rect x="60" y="200" width="140" height="56" class="node"></rect>
         <text x="130" y="224" class="node-title">設計</text>
         <text x="130" y="244" class="node-sub">構造・判断基準</text>
         <!-- 実装 -->
-        <rect x="440" y="200" width="140" height="56" rx="8" class="node"></rect>
+        <rect x="440" y="200" width="140" height="56" class="node"></rect>
         <text x="510" y="224" class="node-title">実装</text>
         <text x="510" y="244" class="node-sub">コード・テスト</text>
         <!-- arrows: PO -> 設計 -> 実装 -> PO -->
-        <line x1="252" y1="76" x2="164" y2="194" class="edge edge-1" marker-end="url(#arrow)"></line>
-        <line x1="206" y1="230" x2="434" y2="230" class="edge edge-2" marker-end="url(#arrow)"></line>
-        <line x1="476" y1="194" x2="388" y2="76" class="edge edge-3" marker-end="url(#arrow)"></line>
+        <line x1="252" y1="76" x2="164" y2="194" class="edge" marker-end="url(#arrow)"></line>
+        <line x1="206" y1="230" x2="434" y2="230" class="edge" marker-end="url(#arrow)"></line>
+        <line x1="476" y1="194" x2="388" y2="76" class="edge" marker-end="url(#arrow)"></line>
         <text x="150" y="130" class="edge-label">要件</text>
         <text x="320" y="220" class="edge-label">仕様</text>
         <text x="490" y="130" class="edge-label">納品</text>
@@ -175,7 +184,7 @@
 
 <footer class="contact">
   <div class="container">
-    <h2>連絡先</h2>
+    <h2 class="cmd">$ cat contact.txt</h2>
     <p>お仕事のご相談は下記メールアドレスまで。</p>
     <p class="contact-mail"><a href="mailto:harumi@guest-reply.jp">harumi@guest-reply.jp</a></p>
   </div>
