@@ -201,6 +201,23 @@ footer.contact {
   margin-bottom: 10px;
 }
 
+/* mailtoが使えない環境向けのフォールバック表記。
+   contact.txt のアドレス表示(.comment + アドレス行)と同じ型 */
+.work-extend .comment {
+  margin-top: 12px;
+  font-size: 0.82rem;
+}
+
+.contact-fallback {
+  margin-top: 4px;
+  font-size: 0.92rem;
+}
+
+/* コピーのための範囲選択を分断しないよう、アドレスは折り返さない */
+.contact-fallback .no-wrap {
+  white-space: nowrap;
+}
+
 /* Skills: 設定ファイル風。等幅の桁揃えを活かすため列幅は表に任せる */
 .table-scroll {
   overflow-x: auto;
