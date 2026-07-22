@@ -186,6 +186,21 @@ footer.contact {
   font-size: 0.9rem;
 }
 
+/* 応用ブロック: 既存カードの下に派生成果を接続する。
+   破線でカード本体(実験)と応用(診断)の区切りを示す */
+.work-extend {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--rule);
+}
+
+.work-extend h4 {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
 /* Skills: 設定ファイル風。等幅の桁揃えを活かすため列幅は表に任せる */
 .table-scroll {
   overflow-x: auto;
