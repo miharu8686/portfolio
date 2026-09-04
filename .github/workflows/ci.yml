@@ -1,0 +1,85 @@
+# 正本は claude-harness/ci-templates/。各リポジトリへは API 経路で配布(ADR 0088)。
+# **このファイルを直接編集しない。**直すのは正本の側で、配布し直す。
+#
+# common.yml — どのリポジトリにも入れる共通層。言語に依存しない検査だけを置く。
+#   1. 制御文字の検査 … Write 系ツールが生の ESC / NUL を書き込む事故が2回起きている
+#      (statusline.js の ESC・turn-state.js の NUL)。NUL が入ると git がバイナリ判定して
+#      差分が読めなくなり、コミットメッセージに入るとコミット自体が失敗する。
+#      **目視では見えない。**だから機械で見る。
+#   2. gitleaks … 秘密情報の混入。履歴も見るため fetch-depth: 0 が要る。
+#
+# 検査は別スクリプトに切り出さず、この run に直接書く。
+# 切り出すと配布物が増え、workflow とスクリプトの版ずれが起きるためである。
+
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+# ワークフロー全体の既定は読み取りのみ。必要なジョブでだけ足す。
+permissions:
+  contents: read
+
+# 同じブランチで新しい実行が始まったら、古い方を取り消す。
+concurrency:
+  # **github.workflow ではなく workflow_ref を使う。**前者は workflow の name であり、
+  # 同じ name の workflow が同居すると group が一致して互いをキャンセルし合う。
+  # 配布先には name: CI の既存 CI が実在する(holo-view / input-lab / review-pipeline)。
+  # workflow_ref はファイルパスを含むので、同名でも分かれる。
+  group: ${{ github.workflow_ref }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  common:
+    name: common
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read # gitleaks-action が PR のコミット一覧を取るのに要る
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0 # gitleaks は履歴も見る
+
+      # 速い検査を先に置く。落ちるなら早く落とす。
+      - name: 制御文字の検査
+        shell: bash
+        run: |
+          set -u
+          mapfile -t files < <(git ls-files -- \
+            '*.js' '*.ts' '*.py' '*.ps1' '*.md' '*.json' \
+            '*.yml' '*.yaml' '*.html' '*.css' '*.txt' '*.sh')
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "対象ファイルなし"
+            exit 0
+          fi
+          hit=0
+          for f in "${files[@]}"; do
+            [ -f "$f" ] || continue
+            # -a はテキスト扱いの強制。付けないと NUL を含むファイルで
+            # 「Binary file matches」になり、行番号が出ない。
+            if out=$(grep -naP '[\x00-\x08\x0b\x0c\x0e-\x1f]' -- "$f" 2>/dev/null); then
+              hit=1
+              line=$(printf '%s' "$out" | head -1 | cut -d: -f1)
+              echo "::error file=$f,line=$line::制御文字を検出した"
+              printf '%s\n' "$out" | head -5 | while IFS= read -r l; do
+                # 制御文字そのものを画面に出さない(端末が壊れる)。位置だけ出す。
+                echo "  $f:$(printf '%s' "$l" | cut -d: -f1)"
+              done
+            fi
+          done
+          if [ "$hit" -ne 0 ]; then
+            echo ""
+            echo "制御文字が混入している。ソースには \\u001b / \\u0000 のエスケープ表記で書くこと。"
+            echo "手元での確認: grep -naP '[\\x00-\\x08\\x0b\\x0c\\x0e-\\x1f]' <file>"
+            exit 1
+          fi
+          echo "制御文字なし (${#files[@]} ファイルを走査)"
+
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v3.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITLEAKS_LICENSE は Organization のみ必要。個人アカウントでは不要。
